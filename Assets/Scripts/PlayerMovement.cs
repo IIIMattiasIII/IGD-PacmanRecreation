@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    public Vector3 direction { get; private set; }
+    public Vector3 direction { get; private set; } = Vector3.zero;
     public Tweener tweener;
     private Animator animator;
     private Vector2[] positions = {
