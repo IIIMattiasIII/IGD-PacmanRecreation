@@ -9,9 +9,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Vector2[] positions = {
         new(-12.5f, 12.5f),
-        new(-12.5f, 8.5f),
-        new(-7.5f, 8.5f),
         new(-7.5f, 12.5f),
+        new(-7.5f, 8.5f),
+        new(-12.5f, 8.5f),
     };
     private int positionIdx;
 
