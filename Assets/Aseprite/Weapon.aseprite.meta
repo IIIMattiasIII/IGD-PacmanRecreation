@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8b457dfb7e7959f478ac53a356b1fffb
+guid: 756d0da2ec50d354e9b4dcf3b2888a27
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -32,7 +32,7 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 0
+    spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
     spritePixelsToUnits: 32
@@ -71,33 +71,33 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   previousAsepriteImporterSettings:
-    fileImportMode: 0
-    importHiddenLayers: 1
-    layerImportMode: 0
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
-    generateModelPrefab: 0
-    generateAnimationClips: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
     addSortingGroup: 0
     addShadowCasters: 0
   asepriteImporterSettings:
-    fileImportMode: 0
-    importHiddenLayers: 1
-    layerImportMode: 0
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
-    generateModelPrefab: 0
-    generateAnimationClips: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
     addSortingGroup: 0
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638936760914034563
+  platformSettingsDirtyTick: 638937242242722535
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: 8_G
+  - name: Weapon_Frame_0
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 44
-      y: 33
-      width: 32
-      height: 6
-    spriteID: 56b208116ecb7cf4ea7c943bacc227a4
+      x: 4
+      y: 81
+      width: 16
+      height: 16
+    spriteID: 3cbbbe50eba8c3d4f9dfdfa508706ef8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,19 +140,239 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 44, y: 33}
-  - name: 7_J
+    uvTransform: {x: 4, y: 81}
+  - name: Weapon_Frame_1
     originalName: 
-    pivot: {x: 0.5, y: 0.7619048}
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 105
+      width: 16
+      height: 16
+    spriteID: fe9fed93ec537704985aa324bba27508
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 105}
+  - name: Weapon_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 4
+      width: 16
+      height: 16
+    spriteID: d6fe9a4ae3f8e2c44a5fbaa2de888783
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 4}
+  - name: Weapon_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 28
+      width: 16
+      height: 16
+    spriteID: 0d2822d565d143c489c578138e68867d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 28}
+  - name: Weapon_Frame_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 52
+      width: 16
+      height: 16
+    spriteID: ea8bacdb2ea4be04dbf33636517ced20
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 52}
+  - name: Weapon_Frame_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 76
+      width: 16
+      height: 16
+    spriteID: 621d9ee8747c3f14592a5672b3154353
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 76}
+  - name: Weapon_Frame_6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 100
+      width: 16
+      height: 16
+    spriteID: b4832edbbfdfa794e966d02a06cc956a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 100}
+  - name: Weapon_Frame_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 4
+      width: 16
+      height: 16
+    spriteID: 3061b23942698e0419bb188c7b96d01a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 4}
+  - name: Weapon_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 28
+      width: 16
+      height: 16
+    spriteID: b97b6ecb212ce474b8edcfcd7c78a1f4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 28}
+  - name: Weapon_Frame_9
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 52
+      width: 16
+      height: 16
+    spriteID: d503192ca0326084cae47dd11838c368
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 52}
+  - name: Weapon_Frame_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 76
+      width: 16
+      height: 16
+    spriteID: 82f244e3bcde4b24888c9bc5a04af643
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 76}
+  - name: Weapon_Frame_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.47058824}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 56
+      width: 16
+      height: 17
+    spriteID: 09b9a8ed2d574b944a40511663899b3a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 56}
+  - name: Weapon_Frame_12
+    originalName: 
+    pivot: {x: 0.5, y: 0.44444445}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 32
-      height: 21
-    spriteID: 94253d0cf9e5eb447838097345dd0dde
+      width: 16
+      height: 18
+    spriteID: 7b950b78eecfdaf4cadc773b35941374
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -161,58 +381,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: 4_IW
+  - name: Weapon_Frame_13
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 84
-      y: 33
-      width: 32
-      height: 6
-    spriteID: e960d850b2ff54948b3b5240fa8dedde
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 84, y: 33}
-  - name: 3_IC
-    originalName: 
-    pivot: {x: 0.15, y: 0.85714287}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 102
-      y: 4
-      width: 20
-      height: 21
-    spriteID: 01faafe0bd3035349b01c3245f182d13
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 102, y: 4}
-  - name: 2_OW
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.44444445}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 33
-      width: 32
-      height: 10
-    spriteID: c851a00d9466e2644940bd20309093b0
+      y: 30
+      width: 16
+      height: 18
+    spriteID: bf12f08b9e5a3944bb9fb8c0fc8a6da8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -220,315 +400,128 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 33}
-  - name: 1_OC_V2
-    originalName: 
-    pivot: {x: 0.23809524, y: 0.7619048}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 44
-      y: 4
-      width: 21
-      height: 21
-    spriteID: 13dfaaf487ddb3146ade8c00574cfde3
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 44, y: 4}
-  - name: 1_OC_V1
-    originalName: 
-    pivot: {x: 0.23809524, y: 0.7619048}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 73
-      y: 4
-      width: 21
-      height: 21
-    spriteID: e3e7d7ca1a88d6a498eb6047406904d5
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 73, y: 4}
-  spriteSheetImportData:
-  - name: Walls_0
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 33
-      width: 32
-      height: 10
-    spriteID: 982f06ae59fd0b841ac45090f5bd6a04
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Walls_1
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 44
-      y: 33
-      width: 32
-      height: 6
-    spriteID: df34eb424b52a50428c438991dd9e9a7
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Walls_2
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 84
-      y: 33
-      width: 32
-      height: 6
-    spriteID: 8cb5106d76076c24b9dea3d67ef41a15
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Walls_3
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 4
-      width: 32
-      height: 21
-    spriteID: 7b7606b8acadf7045a66bb4e2a8bebc2
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Walls_4
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 44
-      y: 4
-      width: 21
-      height: 21
-    spriteID: 8e0409c6980c4ce4c80df0d4c5efd87d
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Walls_5
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 73
-      y: 4
-      width: 21
-      height: 21
-    spriteID: 77084192125ad314a92ec95a89972552
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Walls_6
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 102
-      y: 4
-      width: 20
-      height: 21
-    spriteID: d898f592fed9d784883f0eaa8a261b1f
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
+    uvTransform: {x: 4, y: 30}
+  spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1393427052
-    name: 8_G
-    layerFlags: 3
+    guid: 1179259850
+    name: Weapon
+    layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: 8_G
+    - name: Weapon_Frame_0
       frameIndex: 0
       cellRect:
-        x: 0
-        y: 13
-        width: 32
-        height: 6
-      spriteId: 56b208116ecb7cf4ea7c943bacc227a4
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 1
-    guid: 1393235699
-    name: 7_J
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: 7_J
-      frameIndex: 0
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: 3cbbbe50eba8c3d4f9dfdfa508706ef8
+    - name: Weapon_Frame_1
+      frameIndex: 1
       cellRect:
-        x: 0
-        y: 0
-        width: 32
-        height: 21
-      spriteId: 94253d0cf9e5eb447838097345dd0dde
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 2
-    guid: 364012583
-    name: 4_IW
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: 4_IW
-      frameIndex: 0
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: fe9fed93ec537704985aa324bba27508
+    - name: Weapon_Frame_2
+      frameIndex: 2
       cellRect:
-        x: 0
-        y: 13
-        width: 32
-        height: 6
-      spriteId: e960d850b2ff54948b3b5240fa8dedde
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 3
-    guid: 829729839
-    name: 3_IC
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: 3_IC
-      frameIndex: 0
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: d6fe9a4ae3f8e2c44a5fbaa2de888783
+    - name: Weapon_Frame_3
+      frameIndex: 3
       cellRect:
-        x: 13
-        y: -2
-        width: 20
-        height: 21
-      spriteId: 01faafe0bd3035349b01c3245f182d13
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 4
-    guid: 364037985
-    name: 2_OW
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: 2_OW
-      frameIndex: 0
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: 0d2822d565d143c489c578138e68867d
+    - name: Weapon_Frame_4
+      frameIndex: 4
       cellRect:
-        x: 0
-        y: 11
-        width: 32
-        height: 10
-      spriteId: c851a00d9466e2644940bd20309093b0
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 5
-    guid: 1295425672
-    name: 1_OC_V2
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: 1_OC_V2
-      frameIndex: 0
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: ea8bacdb2ea4be04dbf33636517ced20
+    - name: Weapon_Frame_5
+      frameIndex: 5
       cellRect:
-        x: 11
-        y: 0
-        width: 21
-        height: 21
-      spriteId: 13dfaaf487ddb3146ade8c00574cfde3
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 6
-    guid: 1295425286
-    name: 1_OC_V1
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: 1_OC_V1
-      frameIndex: 0
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: 621d9ee8747c3f14592a5672b3154353
+    - name: Weapon_Frame_6
+      frameIndex: 6
       cellRect:
-        x: 11
-        y: 0
-        width: 21
-        height: 21
-      spriteId: e3e7d7ca1a88d6a498eb6047406904d5
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 7
-    guid: -920845105
-    name: 0_Empty
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells: []
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: b4832edbbfdfa794e966d02a06cc956a
+    - name: Weapon_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: 3061b23942698e0419bb188c7b96d01a
+    - name: Weapon_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: b97b6ecb212ce474b8edcfcd7c78a1f4
+    - name: Weapon_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: d503192ca0326084cae47dd11838c368
+    - name: Weapon_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 8
+        y: 8
+        width: 16
+        height: 16
+      spriteId: 82f244e3bcde4b24888c9bc5a04af643
+    - name: Weapon_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 8
+        y: 8
+        width: 16
+        height: 17
+      spriteId: 09b9a8ed2d574b944a40511663899b3a
+    - name: Weapon_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 8
+        y: 8
+        width: 16
+        height: 18
+      spriteId: 7b950b78eecfdaf4cadc773b35941374
+    - name: Weapon_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 8
+        y: 8
+        width: 16
+        height: 18
+      spriteId: bf12f08b9e5a3944bb9fb8c0fc8a6da8
     linkedCells: []
     parentIndex: -1
   platformSettings:
