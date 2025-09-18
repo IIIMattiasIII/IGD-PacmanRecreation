@@ -177,6 +177,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelFile: {fileID: 4900000, guid: da12757911dbb6c49944ad4a04303d5d, type: 3}
+  tiles:
+  - {fileID: 11400000, guid: 201c2e09d7402b644a6e366ef30acca0, type: 2}
+  - {fileID: 11400000, guid: e7315c0aa54047544874e45289cd499a, type: 2}
+  - {fileID: 11400000, guid: 70c3c7d7769db4b40bc4bd06889761c6, type: 2}
+  - {fileID: 11400000, guid: f60f02b0ee95b89468d0e5c09383491d, type: 2}
+  - {fileID: 11400000, guid: b54e77b5073af084aa9c2b3406bdf158, type: 2}
+  - {fileID: 11400000, guid: 685537d3c6375b540b16b45c4696e27a, type: 2}
+  - {fileID: 11400000, guid: b45e4af712fc9624a93198b4bc01d77f, type: 2}
+  - {fileID: 11400000, guid: fde034c719cb86d418f9ea692328d6b6, type: 2}
+  - {fileID: 11400000, guid: d8909df822d7ff945995e50ce9d9833f, type: 2}
+  cameraPadding: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
