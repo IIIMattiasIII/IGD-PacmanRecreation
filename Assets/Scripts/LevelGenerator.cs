@@ -27,7 +27,7 @@ public class LevelGenerator : MonoBehaviour
         string[] lines = read.Concat(read.Take(read.Length - 1).Reverse()).ToArray(); // Mirror vertically, skipping last row
         int numRows = lines.Length;
         int numCols = lines[0].Split(',').Length * 2;
-        int[,] map = new int[numRows, numCols];
+        int[,] map = new int[numCols, numRows];
         for (int i = 0; i < numRows; i++)
         {
             string[] values = (lines[i] + ',' + new string(lines[i].Reverse().ToArray())).Split(','); // Mirror horizontally
@@ -35,11 +35,11 @@ public class LevelGenerator : MonoBehaviour
             {
                 if (int.TryParse(values[j], out int parsedValue))
                 {
-                    map[i, j] = parsedValue;
+                    map[j, i] = parsedValue;
                 }
                 else
                 {
-                    map[i, j] = 0; // If fails to parse int (though this should never happen)
+                    map[j, i] = 0; // If fails to parse int (though this should never happen)
                     Debug.LogWarning("Int parse failed in ReadLevelFile");
                 }
             }
