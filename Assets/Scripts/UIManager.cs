@@ -15,8 +15,14 @@ public class UIManager : MonoBehaviour
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(border.transform.parent);
-        borderInset = border.rectTransform.offsetMax.y;
+        DontDestroyOnLoad(border.transform.parent.gameObject);
+        borderInset = border.rectTransform.offsetMin.y;
+        border.rectTransform.offsetMin = new(-25, -25);
+        border.rectTransform.offsetMax = new(25, 25);
+    }
+
+    void Start() {
+        _ = BorderIn(3);
     }
 
     public void QuitGame() {
@@ -32,7 +38,7 @@ public class UIManager : MonoBehaviour
     }
 
     async Task BorderOut(float duration) {
-        await BorderTween(border.rectTransform, -50, duration);
+        await BorderTween(border.rectTransform, -25, duration);
     }
 
     async Task BorderTween(RectTransform rect, float newOffset, float duration) {
@@ -46,21 +52,36 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public async Task LoadSceneAsTask(int sceneIdx) {
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (scene.buildIndex == 1) {
+            GameObject qb = GameObject.FindWithTag("LevelExitButton");
+            if (qb != null) qb.GetComponent<Button>().onClick.AddListener(LoadMenu);
+        }
+    }
+
+    public static async Task LoadSceneAsTask(int sceneIdx) {
         TaskCompletionSource<bool> tcs = new();
         AsyncOperation aOp = SceneManager.LoadSceneAsync(sceneIdx);
         aOp.completed += (op) => { tcs.SetResult(true); };
         await tcs.Task;
     }
 
+    async void LoadMenu() {
+        await LoadSceneAsTask(0);
+        Destroy(gameObject);
+    }
+
     public async void LoadLevel(int sceneIdx) {
         titleCanvas.enabled = false;
         loadingText.enabled = true;
+        SceneManager.sceneLoaded += OnSceneLoaded;
         List<Task> tasks = new()
         {
           BorderOut(5),
           LoadSceneAsTask(sceneIdx)
         };
         await Task.WhenAll(tasks);
+        loadingText.enabled = false;
+        Destroy(border.transform.parent.gameObject);
     }
 }
