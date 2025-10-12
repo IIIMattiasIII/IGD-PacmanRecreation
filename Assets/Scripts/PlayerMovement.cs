@@ -7,8 +7,9 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
     public Vector3 direction { get; private set; } = Vector3.zero;
+    public bool isMoving => Vector3.Magnitude(direction) > 0;
     [SerializeField] private Vector3 initDir; 
-    private PlayerManager playerManager;
+    public PlayerManager playerManager { get; private set; }
     private Vector3 initPosition;
     private Vector3 currentInput = Vector3.zero;
     private Vector3 lastInput = Vector3.zero;
