@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - LevelExitButton
+  - Walls
   layers:
   - Default
   - TransparentFX

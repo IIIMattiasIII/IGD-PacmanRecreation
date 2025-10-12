@@ -1,49 +1,73 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PlayerManager))]
+/// AKA: PacStudentController
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
     public Vector3 direction { get; private set; } = Vector3.zero;
-    public Tweener tweener;
-    private Animator animator;
-    private Vector2[] positions = {
-        new(-12.5f, 12.5f),
-        new(-7.5f, 12.5f),
-        new(-7.5f, 8.5f),
-        new(-12.5f, 8.5f),
-    };
-    private int positionIdx;
+    [SerializeField] private Vector3 initDir; 
+    private PlayerManager playerManager;
+    private Vector3 initPosition;
+    private Vector3 currentInput = Vector3.zero;
+    private Vector3 lastInput = Vector3.zero;
 
-    void Awake()
-    {
-        animator = GetComponent<Animator>();
-        if (tweener == null)
-            tweener = GameObject.Find("GameManager").GetComponent<Tweener>();
+    void Awake() {
+        playerManager = GetComponent<PlayerManager>();
+        initPosition = transform.position;
     }
-    void Start()
-    {
+
+    void Start() {
         Reset();
     }
 
-    void Reset()
-    {
-        transform.position = new Vector3(positions[0].x, positions[0].y, transform.position.z);
-        positionIdx = 0;
+    void Reset() {
+        transform.position = initPosition;
+        currentInput = initDir;
+        lastInput = initDir;
     }
 
-    void Update()
-    {
-        if (tweener == null) return;
-        if (!tweener.TweenExists(transform))
+    void GetInput() {
+        if (Input.GetKeyDown(KeyCode.W)) {
+            lastInput = Vector3.up;
+        } else if (Input.GetKeyDown(KeyCode.S)) {
+            lastInput = Vector3.down;
+        } else if (Input.GetKeyDown(KeyCode.A)) {
+            lastInput = Vector3.left;
+        } else if (Input.GetKeyDown(KeyCode.D)) {
+            lastInput = Vector3.right;
+        }
+    }
+
+    bool CanMove(Vector3 playerPos, Vector3 moveDir) {
+        Vector3 newPos = new(playerPos.x + moveDir.x, playerPos.y + moveDir.y, 0);
+        Vector3Int cellPos = playerManager.wallsMap.WorldToCell(newPos);
+        bool tileExists = playerManager.wallsMap.HasTile(cellPos);
+        return !tileExists;
+    }
+
+    void Move() {
+        Vector3 dest = transform.position + currentInput;
+        float time = Vector3.Distance(transform.position, dest) / moveSpeed;
+        playerManager.tweener.AddTween(transform, transform.position, dest, time);
+        direction = Vector3.Normalize(dest - transform.position);
+    }
+
+    void Update() {
+        GetInput();
+        if (!playerManager.tweener.TweenExists(transform))
         {
-            Vector3 dest = new(positions[positionIdx].x, positions[positionIdx].y, transform.position.z);
-            positionIdx = ++positionIdx >= positions.Length ? 0 : positionIdx;
-            float time = Vector3.Distance(transform.position, dest) / moveSpeed;
-            tweener.AddTween(transform, transform.position, dest, time);
-            direction = Vector3.Normalize(dest - transform.position);
-            animator.SetFloat("moveX", direction.x);
-            animator.SetFloat("moveY", direction.y);
+            if (CanMove(transform.position, lastInput)) {
+                currentInput = lastInput;
+                Move();
+            } else if (CanMove(transform.position, currentInput)) {
+                Move();
+            } else {
+                direction = Vector3.zero;
+            }
+            playerManager.animator.SetFloat("moveX", currentInput.x);
+            playerManager.animator.SetFloat("moveY", currentInput.y);
         }
     }
 }

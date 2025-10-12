@@ -292,6 +292,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 53028865c3d9f4d4f85c5981ba76b8d1, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 30704811032557538}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 53028865c3d9f4d4f85c5981ba76b8d1, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 3635980668770102889}
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 53028865c3d9f4d4f85c5981ba76b8d1, type: 3}
       insertIndex: -1
@@ -307,6 +310,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -2253911629886400664, guid: 53028865c3d9f4d4f85c5981ba76b8d1, type: 3}
   m_PrefabInstance: {fileID: 4322972480709127813}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &30704811032557538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577005609349757421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13b0a9f94ebfc240bf1f82d050f87a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3635980668770102889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  tweener: {fileID: 0}
+  initDir: {x: -1, y: 0, z: 0}
 --- !u!114 &192944588266301470
 MonoBehaviour:
   m_ObjectHideFlags: 0
