@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(PlayerManager))]
+/// <summary>
 /// AKA: PacStudentController
+/// </summary>
+[RequireComponent(typeof(PlayerManager))]
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;

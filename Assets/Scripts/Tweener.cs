@@ -6,8 +6,7 @@ public class Tweener : MonoBehaviour
 {
     private List<Tween> activeTweens = new();
 
-    void Update()
-    {
+    void Update() {
         if (!(activeTweens?.Count > 0)) return;
         activeTweens.ForEach(activeTween =>
         {
@@ -22,8 +21,7 @@ public class Tweener : MonoBehaviour
         activeTweens.RemoveAll(tw => tw.Target.position == tw.EndPos);
     }
 
-    public bool TweenExists(Transform target)
-    {
+    public bool TweenExists(Transform target) {
         foreach (Tween tw in activeTweens)
         {
             if (tw.Target == target)
@@ -34,10 +32,13 @@ public class Tweener : MonoBehaviour
         return false;
     }
 
-    public bool AddTween(Transform targetObj, Vector3 startPos, Vector3 endPos, float duration)
-    {
+    public bool AddTween(Transform targetObj, Vector3 startPos, Vector3 endPos, float duration) {
         if (TweenExists(targetObj)) return false;
         activeTweens.Add(new Tween(targetObj, startPos, endPos, Time.time, duration));
         return true;
+    }
+
+    public void RemoveTween(Transform target) {
+        activeTweens.RemoveAll(tw => tw.Target == target);
     }
 }
