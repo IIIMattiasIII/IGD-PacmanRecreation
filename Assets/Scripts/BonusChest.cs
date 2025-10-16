@@ -4,12 +4,16 @@ using UnityEngine;
 public class BonusChest : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 2.2f;
+    [SerializeField] private int points = 100;
     public TaskCompletionSource<bool> life = new();
     public Vector3 dest;
     private Tweener tweener;
+    private LevelManager levelManager;
 
     void Start() {
-        tweener = GameObject.Find("LevelManager").GetComponent<Tweener>();
+        GameObject g = GameObject.Find("LevelManager");
+        tweener = g.GetComponent<Tweener>();
+        levelManager = g.GetComponent<LevelManager>();
         if (tweener == null) {
             Debug.LogWarning("Bouns Chest failed to access tweener");
             Destroy(gameObject);
@@ -27,10 +31,11 @@ public class BonusChest : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        throw new System.NotImplementedException("Bonus collisions not yet implemented");
-        // if (other.gameObject.name == "Player") {
-        //     life.SetResult(true);
-        //     Destroy(gameObject);
-        // }
+        if (other.gameObject.name == "Player") {
+            tweener.RemoveTween(transform);
+            levelManager.AddPoints(points);
+            life.SetResult(true);
+            Destroy(gameObject);
+        }
     }
 }

@@ -49,4 +49,8 @@ public class LevelManager : MonoBehaviour
         if (!startDone) { return; }
         TimeSet();
     }
+
+    public void AddPoints(int p) {
+        score += p;     
+    }
 }
