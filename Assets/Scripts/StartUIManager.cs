@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class StartUIManager : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private Image border;

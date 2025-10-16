@@ -13,17 +13,14 @@ public class AudioManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    void Start()
-    {
-        StartCoroutine(PlayRequired());
-    }
-
-    IEnumerator PlayRequired()
-    {
+    public void PlayIntro() {
         audioSource.clip = intro;
         audioSource.volume = 0.6f;
-        audioSource.Play();
-        yield return new WaitForSeconds(intro.length);
+        audioSource.loop = false;
+        audioSource.Play();        
+    }
+
+    public void PlayBG() {
         audioSource.clip = normalState;
         audioSource.volume = 1f;
         audioSource.Play();
