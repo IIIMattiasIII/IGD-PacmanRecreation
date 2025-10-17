@@ -1,11 +1,14 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(UnityEngine.UI.Button))]
+[RequireComponent(typeof(Button))]
 public class ButtonLogic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private GameObject hoverPanel;
+    [SerializeField] private string levelId = "level01";
     [Header("Button Scaling")]
     [SerializeField] private float hoverScale = 1.01f;
     [SerializeField] private float clickScale = 0.98f;
@@ -19,6 +22,11 @@ public class ButtonLogic : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void Start() {
         if (hasPanel) {
             hoverPanel.SetActive(false);
+            (int score, float time) = SaveManager.Load(levelId);
+            TimeSpan ts = TimeSpan.FromSeconds(time);
+            string formattedTime = string.Format("{0:00}:{1:00}:{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+            hoverPanel.transform.Find("Score").GetComponent<TextMeshProUGUI>().text = score.ToString("D6");
+            hoverPanel.transform.Find("Time").GetComponent<TextMeshProUGUI>().text = formattedTime;
         }
         originalScale = transform.localScale;
         button = gameObject.GetComponent<Button>();

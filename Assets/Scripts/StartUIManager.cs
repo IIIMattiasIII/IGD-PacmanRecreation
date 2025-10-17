@@ -14,15 +14,16 @@ public class StartUIManager : MonoBehaviour
     private float borderInset;
 
     void Awake() {
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(border.transform.parent.gameObject);
         borderInset = border.rectTransform.offsetMin.y;
-        border.rectTransform.offsetMin = new(-25, -25);
-        border.rectTransform.offsetMax = new(25, 25);
     }
 
-    void Start() {
-        _ = BorderIn(3);
+    async void Start() {
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(border.transform.parent.gameObject);
+        border.rectTransform.offsetMin = new(-25, -25);
+        border.rectTransform.offsetMax = new(25, 25);
+        await Task.Delay(100); // Border lerp breaks if called immediately - only with unscaled time, I'd guess due to engine loading time being considered part of frame?
+        _ = BorderIn(.75f);
     }
 
     public void QuitGame() {
@@ -43,11 +44,12 @@ public class StartUIManager : MonoBehaviour
 
     async Task BorderTween(RectTransform rect, float newOffset, float duration) {
         float elapsed = 0f;
+        float initOffset = rect.offsetMin.y;
         while (elapsed < duration) {
-            float lOffset = Mathf.Lerp(rect.offsetMin.y, newOffset, elapsed/duration);
+            float lOffset = Mathf.Lerp(initOffset, newOffset, elapsed/duration);
             rect.offsetMax = new(-lOffset, -lOffset);
             rect.offsetMin = new(lOffset, lOffset);
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             await Task.Yield();
         }
     }
@@ -66,22 +68,19 @@ public class StartUIManager : MonoBehaviour
         await tcs.Task;
     }
 
-    async void LoadMenu() {
+    public async void LoadMenu() {
         await LoadSceneAsTask(0);
         Destroy(gameObject);
     }
 
     public async void LoadLevel(int sceneIdx) {
-        titleCanvas.enabled = false;
-        loadingText.enabled = true;
+        titleCanvas.gameObject.SetActive(false);
+        loadingText.gameObject.SetActive(true);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        List<Task> tasks = new()
-        {
-          BorderOut(5),
-          LoadSceneAsTask(sceneIdx)
-        };
-        await Task.WhenAll(tasks);
-        loadingText.enabled = false;
+        Task bt = BorderOut(1.5f);
+        await LoadSceneAsTask(sceneIdx);
+        loadingText.gameObject.SetActive(false);
+        await bt;
         Destroy(border.transform.parent.gameObject);
     }
 }

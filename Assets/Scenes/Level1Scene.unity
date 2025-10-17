@@ -904,7 +904,7 @@ GameObject:
   - component: {fileID: 455758314}
   m_Layer: 0
   m_Name: LevelManager
-  m_TagString: Untagged
+  m_TagString: LevelManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -986,8 +986,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934a531b503158b439326443404e7ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tweener: {fileID: 455758311}
+  levelId: level01
   uiManager: {fileID: 455758316}
-  bonusController: {fileID: 0}
+  bonusController: {fileID: 455758314}
+  player: {fileID: 5491986218231440763}
+  enemies: []
+  pellets: {fileID: 1897033126}
+  levelState: 0
 --- !u!114 &455758316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1005,6 +1011,7 @@ MonoBehaviour:
   centreText: {fileID: 746423471}
   timer: {fileID: 1538208546}
   score: {fileID: 1000360562}
+  lives: {fileID: 1399867972}
   audioManager: {fileID: 1658066557}
 --- !u!1 &514622387
 GameObject:
@@ -1905,7 +1912,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1134391898
 MonoBehaviour:
@@ -2146,7 +2153,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1200714237
 MonoBehaviour:
@@ -8973,7 +8980,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1820368825
 MonoBehaviour:
@@ -11450,7 +11457,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928394267
 MonoBehaviour:
@@ -12005,9 +12012,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 172950279921671775, guid: 0662bc6c0772a604e8b6ef1c47f3e83d, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: b2e5aea8d0448854db0ccc5f7a533994, type: 3}
+    - target: {fileID: 172950279921671775, guid: 0662bc6c0772a604e8b6ef1c47f3e83d, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b2e5aea8d0448854db0ccc5f7a533994, type: 3}
     - target: {fileID: 3635980668770102889, guid: 0662bc6c0772a604e8b6ef1c47f3e83d, type: 3}
       propertyPath: initDir.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3635980668770102889, guid: 0662bc6c0772a604e8b6ef1c47f3e83d, type: 3}
       propertyPath: initPosition.x
@@ -12066,6 +12081,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0662bc6c0772a604e8b6ef1c47f3e83d, type: 3}
+--- !u!114 &5491986218231440763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 30704811032557538, guid: 0662bc6c0772a604e8b6ef1c47f3e83d, type: 3}
+  m_PrefabInstance: {fileID: 5491986218231440762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13b0a9f94ebfc240bf1f82d050f87a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5861686748038342949
 PrefabInstance:
   m_ObjectHideFlags: 0

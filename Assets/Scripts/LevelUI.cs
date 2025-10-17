@@ -12,6 +12,7 @@ public class LevelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI centreText;
     [SerializeField] private TextMeshProUGUI timer;
     [SerializeField] private TextMeshProUGUI score;
+    [SerializeField] private Transform lives;
     [SerializeField] private AudioManager audioManager;
 
     void Awake() {
@@ -20,6 +21,7 @@ public class LevelUI : MonoBehaviour
     }
 
     public async Task StartSequence() {
+        await Task.Delay(100); // Slight delay to add visual clarity (mask unity leading) to start sequence
         overlay.gameObject.SetActive(true);
         audioManager.PlayIntro();
         await SetCentreText("3", .5f, 500);
@@ -55,5 +57,23 @@ public class LevelUI : MonoBehaviour
     public void SetScore(int sc) {
         string padded = sc.ToString("D6");
         score.text = padded;
+    }
+
+    public void SetLives(int l) {
+        for (int i = 0; i < lives.childCount; i++) {
+            lives.GetChild(i).gameObject.SetActive(l-- > 0);
+        }
+    }
+
+    public async Task GameOver() {
+        overlay.gameObject.SetActive(true);
+        await SetCentreText("Game Over", .5f, 2500);
+        StartUIManager menu = FindFirstObjectByType<StartUIManager>();
+        if (menu == null) { // if scene loaded manually in editor
+            UnityEditor.EditorApplication.isPlaying = false;
+        } else {
+            menu.LoadMenu();
+            Time.timeScale = 1;
+        }
     }
 }

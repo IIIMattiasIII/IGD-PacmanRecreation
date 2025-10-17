@@ -5,6 +5,7 @@ public class PlayerAnimations : MonoBehaviour
 {
     private PlayerMovement playerMovement;
     private ParticleSystem particles;
+    private bool isDead => !playerMovement.playerManager.isAlive;
 
     void Awake() {
         playerMovement = GetComponent<PlayerMovement>();
@@ -17,9 +18,10 @@ public class PlayerAnimations : MonoBehaviour
     }
 
     void Update() {
-        if (playerMovement.isMoving && !particles.emission.enabled) {
+        playerMovement.playerManager.animator.SetBool("dead", isDead);
+        if (!isDead && playerMovement.isMoving && !particles.emission.enabled) {
             ToggleParticles(true);
-        } else if (!playerMovement.isMoving && particles.emission.enabled) {
+        } else if ((isDead || !playerMovement.isMoving) && particles.emission.enabled) {
             ToggleParticles(false);
         }
     }

@@ -2,7 +2,32 @@ fileFormatVersion: 2
 guid: 53028865c3d9f4d4f85c5981ba76b8d1
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Death
+    second: {fileID: 7400000, guid: 824c1a7e444133b4cbcc879f2a9a6242, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: WalkDown
+    second: {fileID: 7400000, guid: e35c062ed15e2d6459557bd1ce2934d1, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: WalkLeft
+    second: {fileID: 7400000, guid: 6e199b114c77c85468f732a61f94f722, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: WalkRight
+    second: {fileID: 7400000, guid: 65b7e94d93381ed4fb86e030d70a05da, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: WalkUp
+    second: {fileID: 7400000, guid: 11c76ff555753bc4e805e9907bc458a4, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -97,7 +122,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638937546832740423
+  platformSettingsDirtyTick: 638963365746417040
   textureAssetName: 
   singleSpriteImportData:
   - name: 

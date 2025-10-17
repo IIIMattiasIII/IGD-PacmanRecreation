@@ -11,7 +11,7 @@ public class BonusChest : MonoBehaviour
     private LevelManager levelManager;
 
     void Start() {
-        GameObject g = GameObject.Find("LevelManager");
+        GameObject g = GameObject.FindWithTag("LevelManager");
         tweener = g.GetComponent<Tweener>();
         levelManager = g.GetComponent<LevelManager>();
         if (tweener == null) {

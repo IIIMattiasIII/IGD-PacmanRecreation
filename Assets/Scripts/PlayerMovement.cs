@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 /// <summary>
 /// AKA: PacStudentController
 /// </summary>
-[RequireComponent(typeof(PlayerManager))]
+[RequireComponent(typeof(Player))]
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
@@ -12,19 +12,21 @@ public class PlayerMovement : MonoBehaviour
     public bool isMoving => Vector3.Magnitude(direction) > 0;
     [SerializeField] private Vector3 initDir; 
     [SerializeField] private Vector3 initPosition;
-    public PlayerManager playerManager { get; private set; }
+    public Player playerManager { get; private set; }
+    private Tweener tweener;
     private Vector3 currentInput = Vector3.zero;
     private Vector3 lastInput = Vector3.zero;
 
     void Awake() {
-        playerManager = GetComponent<PlayerManager>();
+        playerManager = GetComponent<Player>();
     }
 
     void Start() {
+        tweener = playerManager.levelManager.tweener;
         Reset();
     }
 
-    void Reset() {
+    public void Reset() {
         transform.position = initPosition;
         currentInput = initDir;
         lastInput = initDir;
@@ -52,13 +54,14 @@ public class PlayerMovement : MonoBehaviour
     void Move() {
         Vector3 dest = transform.position + currentInput;
         float time = Vector3.Distance(transform.position, dest) / moveSpeed;
-        playerManager.tweener.AddTween(transform, transform.position, dest, time);
+        tweener.AddTween(transform, transform.position, dest, time);
         direction = Vector3.Normalize(dest - transform.position);
     }
 
     void Update() {
         GetInput();
-        if (!playerManager.tweener.TweenExists(transform))
+        if (lastInput == Vector3.zero) { return; }
+        if (!tweener.TweenExists(transform) && playerManager.isAlive)
         {
             if (CanMove(transform.position, lastInput)) {
                 currentInput = lastInput;
