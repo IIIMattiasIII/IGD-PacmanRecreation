@@ -18,7 +18,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Vector3 exitPosition = new(0, 2.5f, -4f);
     public Enemy enemyManager { get; private set; }
     private Tweener tweener;
-    public Vector3 currentDir = Vector3.zero;
+    public Vector3 currentDir { get; private set; } = Vector3.zero;
+    public Vector3 nextDir { get; private set; } = Vector3.zero;
     private bool playerDead => enemyManager.levelManager.levelState == LevelManager.GameState.PlayerDead;
 
     void Awake() {
@@ -35,6 +36,10 @@ public class EnemyMovement : MonoBehaviour
         enemyManager.state = Enemy.EnemyState.Home;
     }
 
+    public void SetMovement(Vector3 dir) {
+        nextDir = dir;
+    }
+
     public void Move(Vector3? dest = null) {
         if (dest == null) dest = transform.position + currentDir;
         float time = Vector3.Distance(transform.position, (Vector3)dest) / moveSpeed;
@@ -45,8 +50,10 @@ public class EnemyMovement : MonoBehaviour
     void Update() {
         if (playerDead || enemyManager.isInactive) { return; }
         if (!tweener.TweenExists(transform)) {
-            if (enemyManager.levelManager.CanMove(transform.position, currentDir)) {
-                // This if check should be removable once nodes and pathing are included, but it doesn't hurt to have the safety check either way
+            if (enemyManager.levelManager.CanMove(transform.position, nextDir)) {
+                currentDir = nextDir;
+                Move();
+            } else if (enemyManager.levelManager.CanMove(transform.position, currentDir)) {
                 Move();
             }
         }
@@ -54,7 +61,7 @@ public class EnemyMovement : MonoBehaviour
         enemyManager.animator.SetFloat("moveY", currentDir.y);
     }
     
-    public IEnumerator HomeMovement(float time) {
+    public IEnumerator HomeMovement(float time, Action Callback) {
         if (currentDir != Vector3.up || currentDir != Vector3.down) {
             if (transform.position.y < 0) { currentDir = Vector3.up; }
             else { currentDir = Vector3.down; }
@@ -75,11 +82,12 @@ public class EnemyMovement : MonoBehaviour
         enemyManager.movement.Move(exitPosition);
         while (tweener.TweenExists(transform)) { yield return null; }
         enemyManager.state = Enemy.EnemyState.Normal;
-        currentDir = initDir;
-        if (currentDir == Vector3.zero) {
+        nextDir = initDir;
+        if (nextDir == Vector3.zero) {
             List<Vector3> dirs = enemyManager.levelManager.GetValidDirections(transform.position);
-            currentDir = dirs[UnityEngine.Random.Range(0, dirs.Count)];
+            nextDir = dirs[UnityEngine.Random.Range(0, dirs.Count)];
         }
+        Callback();
     }
 
     public async Task DeathMovement() {

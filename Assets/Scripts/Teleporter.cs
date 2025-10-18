@@ -12,8 +12,8 @@ public class Teleporter : MonoBehaviour
             pos.z = other.transform.position.z;
             other.transform.position = pos;
         } else if (other.CompareTag("Enemy")) {
-            tweener.RemoveTween(other.transform);
-            other.GetComponent<EnemyMovement>().currentDir *= -1;
+            EnemyMovement em = other.GetComponent<EnemyMovement>();
+            em.SetMovement(em.currentDir*-1);
         }
     }
 }
