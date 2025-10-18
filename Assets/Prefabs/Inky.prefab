@@ -68,6 +68,9 @@ PrefabInstance:
       addedObject: {fileID: 3661589283952729901}
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: dc4cd8b7d5bb7954eb1b19c489cdf325, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3931663013328216894}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: dc4cd8b7d5bb7954eb1b19c489cdf325, type: 3}
+      insertIndex: -1
       addedObject: {fileID: -5776649223582354672}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: dc4cd8b7d5bb7954eb1b19c489cdf325, type: 3}
 --- !u!1 &966241222253054802 stripped
@@ -88,9 +91,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 3661589283952729901}
+  behaviour: {fileID: 3931663013328216894}
   points: 300
   state: 0
-  homeTime: 0
+  homeTime: 8
 --- !u!114 &3661589283952729901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,9 +108,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2.7
-  initDir: {x: 0, y: 0, z: 0}
   homePosition: {x: -0.75, y: -1.5, z: -4}
-  exitPosition: {x: 0, y: 2.5, z: -4}
+  initDir: {x: 0, y: 0, z: 0}
+  exitPosition: {x: -0.5, y: 2.5, z: -4}
+  currentDir: {x: 0, y: -1, z: 0}
+--- !u!114 &3931663013328216894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966241222253054802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba8bcaf5ab34ae4e884a5e2d1d92279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &-5776649223582354672
 BoxCollider2D:
   m_ObjectHideFlags: 0

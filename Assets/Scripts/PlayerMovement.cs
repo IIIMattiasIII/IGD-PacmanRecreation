@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Start() {
+        moveSpeed = playerManager.levelManager.baseMoveSpeed;
         tweener = playerManager.levelManager.tweener;
         Reset();
     }

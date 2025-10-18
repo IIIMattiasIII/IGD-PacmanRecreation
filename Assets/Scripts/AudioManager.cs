@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayBG() {
+        if (audioSource.clip == normalState) { return; }
         audioSource.clip = normalState;
         audioSource.volume = 1f;
         audioSource.Play();
@@ -29,6 +30,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayScared() {
+        if (audioSource.clip == scaredState) { return; }
         audioSource.clip = scaredState;
         audioSource.volume = 1f;
         audioSource.Play();
@@ -36,6 +38,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayKiller() {
+        if (audioSource.clip == killerState) { return; }
         audioSource.clip = killerState;
         audioSource.volume = 1f;
         audioSource.Play();

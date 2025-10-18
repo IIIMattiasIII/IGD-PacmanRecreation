@@ -1,10 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class LevelManager : MonoBehaviour
 {
     public Tweener tweener;
+    public float baseMoveSpeed = 3;
     [SerializeField] private string levelId = "level01";
     [SerializeField] private LevelUI uiManager;
     [SerializeField] private AudioManager audioManager;
@@ -40,8 +43,8 @@ public class LevelManager : MonoBehaviour
             uiManager.SetLives(value);
         }
     }
-    Coroutine scaredSeq;
-    int pointsMultiplier = 1;
+    private Coroutine scaredSeq;
+    private int pointsMultiplier = 1;
 
     void Awake() {
         if (uiManager == null) uiManager = GetComponent<LevelUI>();
@@ -101,6 +104,15 @@ public class LevelManager : MonoBehaviour
         return !tileExists;
     }
 
+    public List<Vector3> GetValidDirections(Vector3 pos) {
+        List<Vector3> ret = new();
+        if (CanMove(pos, Vector3.up)) { ret.Add(Vector3.up); }
+        if (CanMove(pos, Vector3.down)) { ret.Add(Vector3.down); }
+        if (CanMove(pos, Vector3.left)) { ret.Add(Vector3.left); }
+        if (CanMove(pos, Vector3.right)) { ret.Add(Vector3.right); }
+        return ret;
+    }
+
     public void BonusCollected(BonusChest c) {
         score += c.points;
         player.audioManager.BonusChest();
@@ -150,7 +162,7 @@ public class LevelManager : MonoBehaviour
         uiManager.SetScaredTime(0);
         pointsMultiplier = 1;
         levelState = GameState.Normal;
-        audioManager.PlayBG();
+        RespawnMusicCheck();
         scaredSeq = null;
     }
 
@@ -174,6 +186,16 @@ public class LevelManager : MonoBehaviour
         // score += levelId == "level01" ? e.points : e.points * pointsMultiplier++;
         score += e.points * pointsMultiplier++;
         audioManager.PlayKiller();
+    }
+
+    public void RespawnMusicCheck() {
+        if (enemies.All(e => e.state != Enemy.EnemyState.Dead)) {
+            if (levelState == GameState.Normal) {
+                audioManager.PlayBG();
+            } else if (levelState == GameState.Scared) {
+                audioManager.PlayScared();
+            }
+        }
     }
 
     void GameOver() {
