@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class LevelManager : MonoBehaviour
 {
@@ -12,10 +10,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private BonusController bonusController;
     [SerializeField] private Player player;
-    [SerializeField] private GameObject[] enemies;
+    [SerializeField] private Enemy[] enemies;
+    [SerializeField] private Tilemap wallsMap;
     [SerializeField] private Transform pellets;
 
-    public enum GameState { Paused, Normal, Scared, Recovering, Dead }
+    public enum GameState { Paused, Normal, Scared, Recovering, PlayerDead }
     public GameState levelState = GameState.Paused;
     private float _timer = 0;
     public float gameTime {
@@ -49,6 +48,7 @@ public class LevelManager : MonoBehaviour
         if (audioManager == null) audioManager = GameObject.Find("Audio Source").GetComponent<AudioManager>();
         if (bonusController == null) bonusController = GetComponent<BonusController>();
         if (tweener == null) tweener = GetComponent<Tweener>();
+        if (wallsMap == null) wallsMap = GameObject.FindWithTag("Walls").GetComponent<Tilemap>();
     }
 
     void ResetLevel() {
@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
     void ResetLife() {
         player.movement.Reset();
         pointsMultiplier = 1;
-        // enemy reset
+        foreach (Enemy e in enemies) { e.movement.Reset(); }
         levelState = GameState.Normal;
     }
 
@@ -92,6 +92,13 @@ public class LevelManager : MonoBehaviour
     void Update() {
         if (levelState == GameState.Paused) { return; }
         TimeSet();
+    }
+
+    public bool CanMove(Vector3 charPos, Vector3 moveDir) {
+        Vector3 newPos = new(charPos.x + moveDir.x, charPos.y + moveDir.y, 0);
+        Vector3Int cellPos = wallsMap.WorldToCell(newPos);
+        bool tileExists = wallsMap.HasTile(cellPos);
+        return !tileExists;
     }
 
     public void BonusCollected(BonusChest c) {
@@ -149,16 +156,24 @@ public class LevelManager : MonoBehaviour
 
     public void PlayerEaten() {
         lives -= 1;
-        levelState = GameState.Dead;
+        levelState = GameState.PlayerDead;
         player.audioManager.Death();
+        player.animations.DeathParticle();
         tweener.RemoveTween(player.gameObject.transform);
-        foreach (GameObject e in enemies) { tweener.RemoveTween(e.transform); }
+        foreach (Enemy e in enemies) { tweener.RemoveTween(e.gameObject.transform); }
         if (lives > 0) {
             Invoke(nameof(ResetLife), 2f);
         } else {
             Invoke(nameof(GameOver), 1f);
         }
         return;
+    }
+
+    public void EnemyEaten(Enemy e) {
+        // To the marker: I presume including the mult feat in lvl1 is acceptable, but if not, here's the ternary to remove it:
+        // score += levelId == "level01" ? e.points : e.points * pointsMultiplier++;
+        score += e.points * pointsMultiplier++;
+        audioManager.PlayKiller();
     }
 
     void GameOver() {

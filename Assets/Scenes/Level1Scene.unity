@@ -993,6 +993,7 @@ MonoBehaviour:
   bonusController: {fileID: 455758314}
   player: {fileID: 5491986218231440763}
   enemies: []
+  wallsMap: {fileID: 0}
   pellets: {fileID: 1897033126}
   levelState: 0
 --- !u!114 &455758316
@@ -12103,6 +12104,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3531014780390739587, guid: eb4e982a00b35364780f2583e688acb5, type: 3}
+      propertyPath: exitPosition.y
+      value: -2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 518775608848362874, guid: eb4e982a00b35364780f2583e688acb5, type: 3}
       propertyPath: m_Name
       value: Clyde
@@ -12266,6 +12271,10 @@ PrefabInstance:
     - target: {fileID: 966241222253054802, guid: 36166d98b009df04dad3cf3dd3346d8c, type: 3}
       propertyPath: m_Name
       value: Inky
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661589283952729901, guid: 36166d98b009df04dad3cf3dd3346d8c, type: 3}
+      propertyPath: exitPosition.y
+      value: -2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -44,13 +44,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    bool CanMove(Vector3 playerPos, Vector3 moveDir) {
-        Vector3 newPos = new(playerPos.x + moveDir.x, playerPos.y + moveDir.y, 0);
-        Vector3Int cellPos = playerManager.wallsMap.WorldToCell(newPos);
-        bool tileExists = playerManager.wallsMap.HasTile(cellPos);
-        return !tileExists;
-    }
-
     void Move() {
         Vector3 dest = transform.position + currentInput;
         float time = Vector3.Distance(transform.position, dest) / moveSpeed;
@@ -61,12 +54,11 @@ public class PlayerMovement : MonoBehaviour
     void Update() {
         GetInput();
         if (lastInput == Vector3.zero) { return; }
-        if (!tweener.TweenExists(transform) && playerManager.isAlive)
-        {
-            if (CanMove(transform.position, lastInput)) {
+        if (!tweener.TweenExists(transform) && playerManager.isAlive) {
+            if (playerManager.levelManager.CanMove(transform.position, lastInput)) {
                 currentInput = lastInput;
                 Move();
-            } else if (CanMove(transform.position, currentInput)) {
+            } else if (playerManager.levelManager.CanMove(transform.position, currentInput)) {
                 Move();
             } else if (direction != Vector3.zero) {
                 playerManager.audioManager.WallHit();
