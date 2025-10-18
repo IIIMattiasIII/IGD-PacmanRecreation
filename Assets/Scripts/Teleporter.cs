@@ -6,7 +6,7 @@ public class Teleporter : MonoBehaviour
     [SerializeField] private Tweener tweener;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.name == "Player") {
+        if (other.CompareTag("Player")) {
             tweener.RemoveTween(other.transform);
             Vector3 pos = exit.position;
             pos.z = other.transform.position.z;

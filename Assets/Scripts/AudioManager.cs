@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -6,6 +5,8 @@ public class AudioManager : MonoBehaviour
 {
     public AudioClip intro;
     public AudioClip normalState;
+    public AudioClip scaredState;
+    public AudioClip killerState;
     private AudioSource audioSource;
 
     void Awake()
@@ -22,6 +23,20 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBG() {
         audioSource.clip = normalState;
+        audioSource.volume = 1f;
+        audioSource.Play();
+        audioSource.loop = true;
+    }
+
+    public void PlayScared() {
+        audioSource.clip = scaredState;
+        audioSource.volume = 1f;
+        audioSource.Play();
+        audioSource.loop = true;
+    }
+
+    public void PlayKiller() {
+        audioSource.clip = killerState;
         audioSource.volume = 1f;
         audioSource.Play();
         audioSource.loop = true;

@@ -68,7 +68,9 @@ public class PlayerMovement : MonoBehaviour
                 Move();
             } else if (CanMove(transform.position, currentInput)) {
                 Move();
-            } else {
+            } else if (direction != Vector3.zero) {
+                playerManager.audioManager.WallHit();
+                playerManager.animations.WallParticle(currentInput);
                 direction = Vector3.zero;
             }
             playerManager.animator.SetFloat("moveX", currentInput.x);

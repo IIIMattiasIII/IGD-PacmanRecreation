@@ -989,6 +989,7 @@ MonoBehaviour:
   tweener: {fileID: 455758311}
   levelId: level01
   uiManager: {fileID: 455758316}
+  audioManager: {fileID: 0}
   bonusController: {fileID: 455758314}
   player: {fileID: 5491986218231440763}
   enemies: []
@@ -1010,9 +1011,9 @@ MonoBehaviour:
   overlay: {fileID: 1457099962}
   centreText: {fileID: 746423471}
   timer: {fileID: 1538208546}
+  scaredTimer: {fileID: 430748263}
   score: {fileID: 1000360562}
   lives: {fileID: 1399867972}
-  audioManager: {fileID: 1658066557}
 --- !u!1 &514622387
 GameObject:
   m_ObjectHideFlags: 0
@@ -8616,6 +8617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intro: {fileID: 8300000, guid: 821f377975a9eb842b77a4b4c9916e5d, type: 3}
   normalState: {fileID: 8300000, guid: e6196ee0235e7d94eabfcaf0954340fe, type: 3}
+  scaredState: {fileID: 8300000, guid: 75db0942d297eb24ea4f3f55f8669381, type: 3}
+  killerState: {fileID: 8300000, guid: 9a704b7f73df36e41b41c841cf588518, type: 3}
 --- !u!82 &1658066558
 AudioSource:
   m_ObjectHideFlags: 0

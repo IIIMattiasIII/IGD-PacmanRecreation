@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BonusChest : MonoBehaviour
 {
+    public int points = 100;
     [SerializeField] private float moveSpeed = 2.2f;
-    [SerializeField] private int points = 100;
     public TaskCompletionSource<bool> life = new();
     public Vector3 dest;
     private Tweener tweener;
@@ -31,9 +31,9 @@ public class BonusChest : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.name == "Player") {
+        if (other.gameObject.CompareTag("Player")) {
             tweener.RemoveTween(transform);
-            levelManager.AddPoints(points);
+            levelManager.BonusCollected(this);
             life.SetResult(true);
             Destroy(gameObject);
         }

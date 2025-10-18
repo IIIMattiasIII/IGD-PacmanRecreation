@@ -11,25 +11,22 @@ public class LevelUI : MonoBehaviour
     [SerializeField] private Image overlay;
     [SerializeField] private TextMeshProUGUI centreText;
     [SerializeField] private TextMeshProUGUI timer;
+    [SerializeField] private TextMeshProUGUI scaredTimer;
     [SerializeField] private TextMeshProUGUI score;
     [SerializeField] private Transform lives;
-    [SerializeField] private AudioManager audioManager;
 
     void Awake() {
         if (levelManager == null) levelManager = GetComponent<LevelManager>();
-        if (audioManager == null) audioManager = GameObject.Find("Audio Source").GetComponent<AudioManager>();
     }
 
     public async Task StartSequence() {
         await Task.Delay(100); // Slight delay to add visual clarity (mask unity leading) to start sequence
         overlay.gameObject.SetActive(true);
-        audioManager.PlayIntro();
         await SetCentreText("3", .5f, 500);
         await SetCentreText("2", .5f, 500);
         await SetCentreText("1", .5f, 500);
         await SetCentreText("GO!", .5f, 500);
         overlay.gameObject.SetActive(false);
-        audioManager.PlayBG();
         return;
     }
 
@@ -52,6 +49,13 @@ public class LevelUI : MonoBehaviour
         TimeSpan ts = TimeSpan.FromSeconds(t);
         string formattedTime = string.Format("{0:00}:{1:00}:{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
         timer.text = formattedTime;
+    }
+
+    public void SetScaredTime(float t) {
+        scaredTimer.transform.parent.gameObject.SetActive(t > 0);
+        TimeSpan ts = TimeSpan.FromSeconds(t);
+        string formattedTime = string.Format("-{0:00}", ts.Seconds);
+        scaredTimer.text = formattedTime;
     }
 
     public void SetScore(int sc) {
