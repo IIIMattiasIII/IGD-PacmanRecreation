@@ -5,14 +5,20 @@ using UnityEngine;
 /// AKA: GhostController
 /// </summary>
 [RequireComponent(typeof(Enemy))]
-public class EnemyBehaviour : MonoBehaviour
+public abstract class EnemyBehaviour : MonoBehaviour
 {
     public Enemy enemyManager { get; private set; }
-    [SerializeField] private Transform target;
+    [SerializeField] protected Transform target;
+    [SerializeField] protected Transform player;
     private Coroutine homeSeq;
 
     void Awake() {
         enemyManager = GetComponent<Enemy>();
+    }
+
+    public virtual void Reset() {
+        enemyManager.state = Enemy.EnemyState.Home;
+        homeSeq = null;
     }
     
     public void HomeSequence(float time) {
@@ -28,23 +34,30 @@ public class EnemyBehaviour : MonoBehaviour
         enemyManager.levelManager.RespawnMusicCheck();
     }
 
+    protected bool IsBackstep(Vector3 direction) {
+        return direction == -enemyManager.movement.currentDir;
+    }
+
     protected virtual void Scared(List<Vector3> directions) {
-        int idx = Random.Range(0, directions.Count);
-        if (directions.Count > 1 && directions[idx] == -enemyManager.movement.currentDir) {
-            if (++idx >= directions.Count) { idx = 0; }
-        }
-        enemyManager.movement.SetMovement(directions[idx]);
+        RandomDirection(directions);
     }
     
-    // public abstract void Pathfind(List<Vector3> directions);
+    protected abstract void Pathfind(List<Vector3> directions);
 
     void OnTriggerEnter2D(Collider2D other) {
         if (!other.TryGetComponent(out Node node)) { return; }
-        Scared(node.validDirs);
-        // if (enemyManager.isFrightened) {
-        //     Scared(node.validDirs);
-        // } else if (enemyManager.isActive) {
-        //     Pathfind(node.validDirs);
-        // }
+        if (enemyManager.isFrightened) {
+            Scared(node.validDirs);
+        } else if (enemyManager.state == Enemy.EnemyState.Normal) {
+            Pathfind(node.validDirs);
+        }
+    }
+
+    protected void RandomDirection(List<Vector3> directions) {
+        int idx = Random.Range(0, directions.Count);
+        if (directions.Count > 1 && IsBackstep(directions[idx])) {
+            if (++idx >= directions.Count) { idx = 0; }
+        }
+        enemyManager.movement.SetMovement(directions[idx]);
     }
 }

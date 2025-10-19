@@ -33,7 +33,6 @@ public class EnemyMovement : MonoBehaviour
 
     public void Reset() {
         transform.position = homePosition;
-        enemyManager.state = Enemy.EnemyState.Home;
     }
 
     public void SetMovement(Vector3 dir) {

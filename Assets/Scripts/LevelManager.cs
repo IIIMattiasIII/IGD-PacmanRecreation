@@ -68,7 +68,10 @@ public class LevelManager : MonoBehaviour
     void ResetLife() {
         player.movement.Reset();
         pointsMultiplier = 1;
-        foreach (Enemy e in enemies) { e.movement.Reset(); }
+        foreach (Enemy e in enemies) {
+            e.movement.Reset();
+            e.behaviour.Reset();
+        }
         levelState = GameState.Normal;
     }
 
