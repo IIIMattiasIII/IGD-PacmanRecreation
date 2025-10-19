@@ -7,13 +7,10 @@ public class BonusChest : MonoBehaviour
     [SerializeField] private float moveSpeed = 2.2f;
     public TaskCompletionSource<bool> life = new();
     public Vector3 dest;
-    private Tweener tweener;
-    private LevelManager levelManager;
+    public Tweener tweener;
+    public LevelManager levelManager;
 
     void Start() {
-        GameObject g = GameObject.FindWithTag("LevelManager");
-        tweener = g.GetComponent<Tweener>();
-        levelManager = g.GetComponent<LevelManager>();
         if (tweener == null) {
             Debug.LogWarning("Bouns Chest failed to access tweener");
             Destroy(gameObject);

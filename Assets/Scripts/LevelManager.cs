@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     public Tweener tweener;
     public float baseMoveSpeed = 3;
+    public Vector2 levelSize = new(28,29);
     [SerializeField] private string levelId = "level01";
     [SerializeField] private LevelUI uiManager;
     [SerializeField] private AudioManager audioManager;
