@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ public class LevelManager : MonoBehaviour
         }
     }
     private Coroutine scaredSeq;
-    private int pointsMultiplier = 1;
+    private int pointsMultiplier = 0;
 
     void Awake() {
         if (uiManager == null) uiManager = GetComponent<LevelUI>();
@@ -68,7 +69,7 @@ public class LevelManager : MonoBehaviour
 
     void ResetLife() {
         player.movement.Reset();
-        pointsMultiplier = 1;
+        pointsMultiplier = 0;
         foreach (Enemy e in enemies) {
             e.movement.Reset();
             e.behaviour.Reset();
@@ -164,7 +165,7 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
         uiManager.SetScaredTime(0);
-        pointsMultiplier = 1;
+        pointsMultiplier = 0;
         levelState = GameState.Normal;
         RespawnMusicCheck();
         scaredSeq = null;
@@ -186,9 +187,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void EnemyEaten(Enemy e) {
-        // To the marker: I presume including the mult feat in lvl1 is acceptable, but if not, here's the ternary to remove it:
-        // score += levelId == "level01" ? e.points : e.points * pointsMultiplier++;
-        score += e.points * pointsMultiplier++;
+        score += levelId == "level01" ? e.points : e.points * (int)Math.Pow(2, pointsMultiplier++);
         audioManager.PlayKiller();
     }
 
