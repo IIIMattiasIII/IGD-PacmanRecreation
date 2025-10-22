@@ -32,7 +32,11 @@ public class EnemyMovement : MonoBehaviour
     }
 
     public void Reset() {
-        transform.position = homePosition;
+        if (enemyManager.state == Enemy.EnemyState.Home) {
+            transform.position = homePosition;
+        } else {
+            transform.position = exitPosition;
+        }
     }
 
     public void SetMovement(Vector3 dir) {
@@ -40,7 +44,9 @@ public class EnemyMovement : MonoBehaviour
     }
 
     public void Move(Vector3? dest = null) {
-        if (dest == null) dest = transform.position + currentDir;
+        if (dest == null) {
+            dest = LevelManager.GridAlign(transform.position + currentDir, currentDir);
+        }
         float time = Vector3.Distance(transform.position, (Vector3)dest) / moveSpeed;
         tweener.AddTween(transform, transform.position, (Vector3)dest, time);
         direction = Vector3.Normalize((Vector3)dest - transform.position);
@@ -65,7 +71,7 @@ public class EnemyMovement : MonoBehaviour
             if (transform.position.y < 0) { currentDir = Vector3.up; }
             else { currentDir = Vector3.down; }
         }
-        while (time > 0) {
+        while (time > 0 || playerDead) {
             time -= Time.deltaTime;
             if (tweener.TweenExists(transform)) { yield return null; continue; }
             if (!enemyManager.levelManager.CanMove(transform.position, currentDir)) {
@@ -81,11 +87,6 @@ public class EnemyMovement : MonoBehaviour
         enemyManager.movement.Move(exitPosition);
         while (tweener.TweenExists(transform)) { yield return null; }
         enemyManager.state = Enemy.EnemyState.Normal;
-        nextDir = initDir;
-        if (nextDir == Vector3.zero) {
-            List<Vector3> dirs = enemyManager.levelManager.GetValidDirections(transform.position);
-            nextDir = dirs[UnityEngine.Random.Range(0, dirs.Count)];
-        }
         Callback();
     }
 

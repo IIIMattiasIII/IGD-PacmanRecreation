@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(Player))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    private float moveSpeed = 3f;
     public Vector3 direction { get; private set; } = Vector3.zero;
     public bool isMoving => Vector3.Magnitude(direction) > 0;
     [SerializeField] private Vector3 initDir; 
@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move() {
         Vector3 dest = transform.position + currentInput;
+        dest = LevelManager.GridAlign(dest, currentInput);
         float time = Vector3.Distance(transform.position, dest) / moveSpeed;
         tweener.AddTween(transform, transform.position, dest, time);
         direction = Vector3.Normalize(dest - transform.position);

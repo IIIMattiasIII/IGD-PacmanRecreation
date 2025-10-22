@@ -96,9 +96,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: -3777829373528900748}
   behaviour: {fileID: 0}
-  points: 300
+  points: 200
   state: 0
-  homeTime: 2
+  homeTime: 0
 --- !u!114 &-3777829373528900748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2.7
-  homePosition: {x: 0.75, y: -1.5, z: -4}
-  initDir: {x: 0, y: 0, z: 0}
-  exitPosition: {x: 0.5, y: 2.5, z: -4}
+  homePosition: {x: 0, y: -0.5, z: -4}
+  initDir: {x: 0, y: 1, z: 0}
+  exitPosition: {x: 0, y: 2.5, z: -4}
 --- !u!50 &-7962356427497469637
 Rigidbody2D:
   serializedVersion: 4

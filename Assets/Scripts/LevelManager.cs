@@ -71,8 +71,8 @@ public class LevelManager : MonoBehaviour
         player.movement.Reset();
         pointsMultiplier = 0;
         foreach (Enemy e in enemies) {
-            e.movement.Reset();
             e.behaviour.Reset();
+            e.movement.Reset();
         }
         levelState = GameState.Normal;
     }
@@ -116,6 +116,21 @@ public class LevelManager : MonoBehaviour
         if (CanMove(pos, Vector3.left)) { ret.Add(Vector3.left); }
         if (CanMove(pos, Vector3.right)) { ret.Add(Vector3.right); }
         return ret;
+    }
+    
+    public static float HalfUnit(float value) {
+        float sign = Math.Sign(value);
+        float absValue = Math.Abs(value);
+        float fractionalPart = absValue - (float)Math.Truncate(absValue);
+
+        if (Math.Abs(fractionalPart - 0.5f) < float.Epsilon) { return value; }
+        else { return ((float)Math.Truncate(absValue) + 0.5f) * sign; }
+    }
+
+    public static Vector3 GridAlign(Vector3 pos, Vector3 moveDir) {
+        if (moveDir == Vector3.up || moveDir == Vector3.down) pos.y = HalfUnit(pos.y);
+        else if (moveDir == Vector3.left || moveDir == Vector3.right) pos.x = HalfUnit(pos.x);
+        return pos;
     }
 
     public void BonusCollected(BonusChest c) {
