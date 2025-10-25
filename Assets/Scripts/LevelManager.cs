@@ -113,8 +113,8 @@ public class LevelManager : MonoBehaviour
     public List<Vector3> GetValidDirections(Vector3 pos) {
         List<Vector3> ret = new();
         if (CanMove(pos, Vector3.up)) { ret.Add(Vector3.up); }
-        if (CanMove(pos, Vector3.down)) { ret.Add(Vector3.down); }
         if (CanMove(pos, Vector3.left)) { ret.Add(Vector3.left); }
+        if (CanMove(pos, Vector3.down)) { ret.Add(Vector3.down); }
         if (CanMove(pos, Vector3.right)) { ret.Add(Vector3.right); }
         return ret;
     }

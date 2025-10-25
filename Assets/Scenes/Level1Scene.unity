@@ -8611,9 +8611,8 @@ MonoBehaviour:
   debugSprite: {fileID: 0}
   debugCol: {r: 255, g: 255, b: 255, a: 1}
   edgeTargets:
-  - {fileID: 1749224147}
-  - {fileID: 941488827}
-  targetReached: 0
+  - {x: -7.5, y: -0.5}
+  - {x: 7.5, y: -0.5}
 --- !u!1 &1749224146
 GameObject:
   m_ObjectHideFlags: 0

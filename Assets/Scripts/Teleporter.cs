@@ -14,9 +14,6 @@ public class Teleporter : MonoBehaviour
         } else if (other.CompareTag("Enemy")) {
             EnemyMovement em = other.GetComponent<EnemyMovement>();
             em.Backstep();
-            // if (em.TryGetComponent(out Enemy4Behaviour eb)) {
-            //     eb.targetReached = true;
-            // }
         }
     }
 }
