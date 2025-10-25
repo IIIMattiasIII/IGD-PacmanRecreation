@@ -21,13 +21,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [SerializeField] private Color debugCol = new(255,255,255);
     private GameObject debugNode;
     void TargetDebug(){
-        if (debug && debugNode == null && enemyManager.state == Enemy.EnemyState.Normal) {
+        if (debug && debugNode == null && enemyManager.state == Enemy.EnemyState.Chase) {
             debugNode = new GameObject();
             debugNode.name = gameObject.name + "_DebugNode";
             SpriteRenderer sr = debugNode.AddComponent<SpriteRenderer>();
             sr.sprite = debugSprite;
             sr.color = debugCol;
-        } else if ((!debug || enemyManager.state != Enemy.EnemyState.Normal) && debugNode != null) {
+        } else if ((!debug || enemyManager.state != Enemy.EnemyState.Chase) && debugNode != null) {
             Destroy(debugNode);
             debugNode = null;
         }
@@ -47,7 +47,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         enemyManager.state = Enemy.EnemyState.Home;
         homeSeq = null;
     }
-    
+
     public void HomeSequence(float time) {
         if (homeSeq != null) { return; }
         enemyManager.Trigger("normal");
@@ -56,6 +56,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     protected virtual void HomeExit() {
         homeSeq = null;
+        enemyManager.levelManager.CheckElroy();
     }
 
     public async void DeathSequence() {
@@ -66,6 +67,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     protected bool IsBackstep(Vector3 direction) {
         return direction == -enemyManager.movement.currentDir;
+    }
+
+    public virtual void SwapAttackState(Enemy.EnemyState attackState) {
+        enemyManager.state = attackState;
+        enemyManager.movement.Backstep();
     }
 
     protected virtual void Scared(List<Vector3> directions) {
@@ -87,9 +93,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
         List<Vector3> validDirs = enemyManager.levelManager.GetValidDirections(transform.position);
         if (enemyManager.isFrightened) {
             Scared(validDirs);
-        } else if (enemyManager.state == Enemy.EnemyState.Normal) {
+        } else if (enemyManager.state == Enemy.EnemyState.Chase) {
             Chase(validDirs);
-        } else if (false) { // To be updated once chase-scatter timer and scatter states are implemented
+        } else if (enemyManager.state == Enemy.EnemyState.Scatter) {
             Scatter(validDirs);
         }
     }

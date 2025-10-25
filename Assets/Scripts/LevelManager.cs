@@ -48,6 +48,8 @@ public class LevelManager : MonoBehaviour
     private Coroutine scaredSeq;
     private int pointsMultiplier = 0;
     public bool isInnov => levelId == "level02";
+    public LevelAttackStateTimer attackTimer;
+    public Enemy.EnemyState lastAttackState = Enemy.EnemyState.Scatter;
 
     void Awake() {
         if (uiManager == null) uiManager = GetComponent<LevelUI>();
@@ -55,6 +57,20 @@ public class LevelManager : MonoBehaviour
         if (bonusController == null) bonusController = GetComponent<BonusController>();
         if (tweener == null) tweener = GetComponent<Tweener>();
         if (wallsMap == null) wallsMap = GameObject.FindWithTag("Walls").GetComponent<Tilemap>();
+
+        if (isInnov) {
+            // Timings match original game's first level, but stretched out to account for this games slower move speed
+            List<LevelAttackStateTimer.TimerEvent> timerEvents = new() {
+              new LevelAttackStateTimer.TimerEvent { triggerTime = 9f, state = Enemy.EnemyState.Chase },
+              new LevelAttackStateTimer.TimerEvent { triggerTime = 35f, state = Enemy.EnemyState.Scatter },
+              new LevelAttackStateTimer.TimerEvent { triggerTime = 44f, state = Enemy.EnemyState.Chase },
+              new LevelAttackStateTimer.TimerEvent { triggerTime = 70f, state = Enemy.EnemyState.Scatter },
+              new LevelAttackStateTimer.TimerEvent { triggerTime = 76.5f, state = Enemy.EnemyState.Chase },
+              new LevelAttackStateTimer.TimerEvent { triggerTime = 102.5f, state = Enemy.EnemyState.Scatter },
+              new LevelAttackStateTimer.TimerEvent { triggerTime = 109f, state = Enemy.EnemyState.Chase }
+            };
+            attackTimer = new LevelAttackStateTimer(timerEvents, enemies, s => lastAttackState = s);
+        }
     }
 
     void ResetLevel() {
@@ -76,6 +92,7 @@ public class LevelManager : MonoBehaviour
             e.movement.Reset();
         }
         levelState = GameState.Normal;
+        attackTimer?.Reset();
     }
 
     async void Start() {
@@ -92,6 +109,7 @@ public class LevelManager : MonoBehaviour
         }
         audioManager.PlayBG();
         levelState = GameState.Normal;
+        attackTimer?.Start();
     }
 
     void TimeSet() {
@@ -101,6 +119,7 @@ public class LevelManager : MonoBehaviour
     void Update() {
         if (levelState == GameState.Paused) { return; }
         TimeSet();
+        attackTimer?.Update();
     }
 
     public bool CanMove(Vector3 charPos, Vector3 moveDir) {
@@ -145,6 +164,7 @@ public class LevelManager : MonoBehaviour
         if (!HasPellets()) {
             GameOver();
         }
+        CheckElroy();
     }
 
     bool HasPellets() {
@@ -156,6 +176,20 @@ public class LevelManager : MonoBehaviour
         return false;
     }
 
+    public void CheckElroy() {
+        if (isInnov && RemainingPelletCount() <= 20 && enemies.All(e => e.isActive)) {
+            foreach (Enemy e in enemies) { if (e.TryGetComponent(out Blinky b)) { b.CruiseElroy(); } }
+        }
+    }
+
+    int RemainingPelletCount() {
+        int ret = 0;
+        foreach (Transform pellet in pellets) {
+            if (pellet.gameObject.activeSelf) { ret++; }
+        }
+        return ret;
+    }
+
     public void PowerPelletEaten(PowerPellet p) {
         PelletEaten(p);
         player.audioManager.PowerPellet();
@@ -165,6 +199,7 @@ public class LevelManager : MonoBehaviour
             audioManager.PlayScared();
             if (isInnov) {
                 foreach (Enemy e in enemies) { e.movement.Backstep(); }
+                attackTimer.Stop();
             }
         }
         levelState = GameState.Scared;
@@ -188,6 +223,7 @@ public class LevelManager : MonoBehaviour
         levelState = GameState.Normal;
         RespawnMusicCheck();
         foreach (Enemy e in enemies) { if (e.TryGetComponent(out Enemy4Behaviour eb)) { eb.EdgeTargetReset(); }}
+        attackTimer?.Start();
         scaredSeq = null;
     }
 

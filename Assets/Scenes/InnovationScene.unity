@@ -689,9 +689,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweener: {fileID: 455758311}
-  baseMoveSpeed: 3
+  baseMoveSpeed: 3.8
   levelSize: {x: 28, y: 31}
-  levelId: level01
+  levelId: level02
   uiManager: {fileID: 455758316}
   audioManager: {fileID: 1658066557}
   bonusController: {fileID: 455758314}
@@ -701,9 +701,10 @@ MonoBehaviour:
   - {fileID: 2131089412}
   - {fileID: 948755880}
   - {fileID: 1667211496}
-  wallsMap: {fileID: 0}
+  wallsMap: {fileID: 1528793395}
   pellets: {fileID: 1897033126}
   levelState: 0
+  lastAttackState: 2
 --- !u!114 &455758316
 MonoBehaviour:
   m_ObjectHideFlags: 0
