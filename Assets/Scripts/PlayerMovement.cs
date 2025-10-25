@@ -71,4 +71,8 @@ public class PlayerMovement : MonoBehaviour
             playerManager.animator.SetFloat("moveY", currentInput.y);
         }
     }
+
+    public Vector3 GetCurrentFacing() {
+        return currentInput;
+    }
 }

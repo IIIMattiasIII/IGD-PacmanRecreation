@@ -72,6 +72,9 @@ PrefabInstance:
       addedObject: {fileID: -3531014780390739587}
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: dc4cd8b7d5bb7954eb1b19c489cdf325, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 797232651978285912}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: dc4cd8b7d5bb7954eb1b19c489cdf325, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 8428553008970833796}
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: dc4cd8b7d5bb7954eb1b19c489cdf325, type: 3}
       insertIndex: -1
@@ -95,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: -3531014780390739587}
-  behaviour: {fileID: 0}
+  behaviour: {fileID: 797232651978285912}
   points: 200
   state: 0
   homeTime: 16
@@ -115,6 +118,24 @@ MonoBehaviour:
   homePosition: {x: 2, y: -0.5, z: -4}
   initDir: {x: 0, y: -1, z: 0}
   exitPosition: {x: 0, y: 2.5, z: -4}
+--- !u!114 &797232651978285912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518775608848362874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81727a6ccbc03324ea56abec627fe4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scatterCorner: {x: -14, y: -17, z: 0}
+  target: {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
+  debug: 0
+  debugSprite: {fileID: -3384411708189302445, guid: 1248a5000a602f541b326adbef6ced8b, type: 3}
+  debugCol: {r: 1, g: 0.72156864, b: 0.32156864, a: 1}
 --- !u!50 &8428553008970833796
 Rigidbody2D:
   serializedVersion: 4

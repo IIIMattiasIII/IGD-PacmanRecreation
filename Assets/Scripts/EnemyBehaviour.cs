@@ -9,12 +9,38 @@ using UnityEngine;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
     public Enemy enemyManager { get; private set; }
-    [SerializeField] protected Transform target;
+    [SerializeField] protected Vector3 scatterCorner;
+    [SerializeField] protected Vector3 target;
     [SerializeField] protected Transform player;
     private Coroutine homeSeq;
 
+    // ===
+    [Header("Path Target Debug")]
+    [SerializeField] private bool debug;
+    [SerializeField] private Sprite debugSprite;
+    [SerializeField] private Color debugCol = new(255,255,255);
+    private GameObject debugNode;
+    void TargetDebug(){
+        if (debug && debugNode == null && enemyManager.state == Enemy.EnemyState.Normal) {
+            debugNode = new GameObject();
+            debugNode.name = gameObject.name + "_DebugNode";
+            SpriteRenderer sr = debugNode.AddComponent<SpriteRenderer>();
+            sr.sprite = debugSprite;
+            sr.color = debugCol;
+        } else if ((!debug || enemyManager.state != Enemy.EnemyState.Normal) && debugNode != null) {
+            Destroy(debugNode);
+            debugNode = null;
+        }
+        if (debugNode != null) debugNode.transform.position = target;
+    }
+    // ===
+
     void Awake() {
         enemyManager = GetComponent<Enemy>();
+    }
+    
+    void Update() {
+        TargetDebug();
     }
 
     public virtual void Reset() {
@@ -28,9 +54,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
         homeSeq = StartCoroutine(enemyManager.movement.HomeMovement(time, HomeExit));
     }
 
-    void HomeExit() {
+    protected virtual void HomeExit() {
         homeSeq = null;
-        Pathfind(enemyManager.levelManager.GetValidDirections(transform.position));
     }
 
     public async void DeathSequence() {
@@ -46,15 +71,26 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected virtual void Scared(List<Vector3> directions) {
         RandomDirection(directions);
     }
-    
-    protected abstract void Pathfind(List<Vector3> directions);
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (!other.TryGetComponent(out Node node)) { return; }
+    protected virtual void Scatter(List<Vector3> directions) {
+        Closest(directions, scatterCorner);
+    }
+    
+    protected virtual void Chase(List<Vector3> directions) {
+        SetTarget();
+        Closest(directions, target);
+    }
+
+    protected virtual void SetTarget() {}
+
+    public void Pathfind() {
+        List<Vector3> validDirs = enemyManager.levelManager.GetValidDirections(transform.position);
         if (enemyManager.isFrightened) {
-            Scared(node.validDirs);
+            Scared(validDirs);
         } else if (enemyManager.state == Enemy.EnemyState.Normal) {
-            Pathfind(node.validDirs);
+            Chase(validDirs);
+        } else if (false) { // To be updated once chase-scatter timer and scatter states are implemented
+            Scatter(validDirs);
         }
     }
     
@@ -77,7 +113,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         return 4; // This shouldn't ever occur
     }
 
-    protected static int CompareDirections(Tuple<Vector3, float> t1, Tuple<Vector3, float> t2) {
+    static int CompareDirections(Tuple<Vector3, float> t1, Tuple<Vector3, float> t2) {
         int floatComparison = t1.Item2.CompareTo(t2.Item2);
         if (floatComparison == 0) { return GetVectorPriority(t1.Item1).CompareTo(GetVectorPriority(t2.Item1)); }
         return floatComparison;

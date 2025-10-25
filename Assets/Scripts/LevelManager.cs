@@ -47,6 +47,7 @@ public class LevelManager : MonoBehaviour
     }
     private Coroutine scaredSeq;
     private int pointsMultiplier = 0;
+    public bool isInnov => levelId == "level02";
 
     void Awake() {
         if (uiManager == null) uiManager = GetComponent<LevelUI>();
@@ -162,6 +163,9 @@ public class LevelManager : MonoBehaviour
             StopCoroutine(scaredSeq);
         } else {
             audioManager.PlayScared();
+            if (isInnov) {
+                foreach (Enemy e in enemies) { e.movement.Backstep(); }
+            }
         }
         levelState = GameState.Scared;
         scaredSeq = StartCoroutine(ScaredSequence(p.duration));
@@ -183,6 +187,7 @@ public class LevelManager : MonoBehaviour
         pointsMultiplier = 0;
         levelState = GameState.Normal;
         RespawnMusicCheck();
+        foreach (Enemy e in enemies) { if (e.TryGetComponent(out Enemy4Behaviour eb)) { eb.EdgeTargetReset(); }}
         scaredSeq = null;
     }
 
@@ -202,7 +207,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void EnemyEaten(Enemy e) {
-        score += levelId == "level01" ? e.points : e.points * (int)Math.Pow(2, pointsMultiplier++);
+        score += isInnov ? e.points * (int)Math.Pow(2, pointsMultiplier++) : e.points;
         audioManager.PlayKiller();
     }
 

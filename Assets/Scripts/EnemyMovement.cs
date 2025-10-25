@@ -10,7 +10,7 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class EnemyMovement : MonoBehaviour
 {
-    public float moveSpeed = 2.7f;
+    [HideInInspector] public float moveSpeed = 2.7f;
     public Vector3 direction { get; private set; } = Vector3.zero;
     public Vector3 homePosition;
     public bool isMoving => Vector3.Magnitude(direction) > 0;
@@ -43,6 +43,13 @@ public class EnemyMovement : MonoBehaviour
         nextDir = dir;
     }
 
+    public void Backstep() {
+        if (enemyManager.isInactive) { return; }
+        currentDir *= -1;
+        nextDir = currentDir;
+        tweener.RemoveTween(transform);
+    }
+
     public void Move(Vector3? dest = null) {
         if (dest == null) {
             dest = LevelManager.GridAlign(transform.position + currentDir, currentDir);
@@ -55,6 +62,7 @@ public class EnemyMovement : MonoBehaviour
     void Update() {
         if (playerDead || enemyManager.isInactive) { return; }
         if (!tweener.TweenExists(transform)) {
+            enemyManager.behaviour.Pathfind();
             if (enemyManager.levelManager.CanMove(transform.position, nextDir)) {
                 currentDir = nextDir;
                 Move();
@@ -95,7 +103,7 @@ public class EnemyMovement : MonoBehaviour
         Move(homePosition);
         enemyManager.animator.SetFloat("moveX", direction.x);
         enemyManager.animator.SetFloat("moveY", direction.y);
-        while (tweener.TweenExists(transform)) { await Task.Yield(); }
+        while (this != null && tweener.TweenExists(transform)) { await Task.Yield(); }
         return;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy1Behaviour : EnemyLvl1Behaviour
 {
-    protected override void Pathfind(List<Vector3> directions) {
+    protected override void Chase(List<Vector3> directions) {
         Furthest(directions, player.position);
     }
 }

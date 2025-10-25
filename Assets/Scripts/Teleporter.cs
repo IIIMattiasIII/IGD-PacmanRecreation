@@ -13,10 +13,10 @@ public class Teleporter : MonoBehaviour
             other.transform.position = pos;
         } else if (other.CompareTag("Enemy")) {
             EnemyMovement em = other.GetComponent<EnemyMovement>();
-            em.SetMovement(em.currentDir*-1);
-            if (em.TryGetComponent(out Enemy4Behaviour eb)) {
-                eb.targetReached = true;
-            }
+            em.Backstep();
+            // if (em.TryGetComponent(out Enemy4Behaviour eb)) {
+            //     eb.targetReached = true;
+            // }
         }
     }
 }
