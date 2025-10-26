@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweener: {fileID: 455758311}
-  baseMoveSpeed: 3
+  baseMoveSpeed: 3.8
   levelSize: {x: 28, y: 29}
   levelId: level01
   uiManager: {fileID: 455758316}
@@ -976,6 +976,7 @@ MonoBehaviour:
   wallsMap: {fileID: 0}
   pellets: {fileID: 1897033126}
   levelState: 0
+  lastAttackState: 2
 --- !u!114 &455758316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,6 +996,7 @@ MonoBehaviour:
   scaredTimer: {fileID: 430748263}
   score: {fileID: 1000360562}
   lives: {fileID: 1399867972}
+  pauseOverlay: {fileID: 0}
 --- !u!1 &514622387
 GameObject:
   m_ObjectHideFlags: 0
@@ -8464,6 +8466,7 @@ MonoBehaviour:
   normalState: {fileID: 8300000, guid: e6196ee0235e7d94eabfcaf0954340fe, type: 3}
   scaredState: {fileID: 8300000, guid: 75db0942d297eb24ea4f3f55f8669381, type: 3}
   killerState: {fileID: 8300000, guid: 9a704b7f73df36e41b41c841cf588518, type: 3}
+  pauseVolMult: 0.3
 --- !u!82 &1658066558
 AudioSource:
   m_ObjectHideFlags: 0

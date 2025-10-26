@@ -55,10 +55,8 @@ public class StartUIManager : MonoBehaviour
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        if (scene.buildIndex == 1) {
-            GameObject qb = GameObject.FindWithTag("LevelExitButton");
-            if (qb != null) qb.GetComponent<Button>().onClick.AddListener(LoadMenu);
-        }
+        GameObject qb = GameObject.FindWithTag("LevelExitButton");
+        if (qb != null) qb.GetComponent<Button>().onClick.AddListener(LoadMenu);
     }
 
     public static async Task LoadSceneAsTask(int sceneIdx) {
@@ -70,6 +68,7 @@ public class StartUIManager : MonoBehaviour
 
     public async void LoadMenu() {
         await LoadSceneAsTask(0);
+        if (border != null) Destroy(border.transform.parent.gameObject);
         Destroy(gameObject);
     }
 
@@ -80,7 +79,13 @@ public class StartUIManager : MonoBehaviour
         Task bt = BorderOut(1.5f);
         await LoadSceneAsTask(sceneIdx);
         loadingText.gameObject.SetActive(false);
-        await bt;
-        Destroy(border.transform.parent.gameObject);
+        LevelManager lm = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
+        if (lm.isInnov) {
+            lm.uiManager.BorderIn = () => _ = BorderIn(.75f);
+            lm.uiManager.BorderOut = () => _ = BorderOut(.75f);
+        } else {
+            await bt;
+            Destroy(border.transform.parent.gameObject);
+        }
     }
 }

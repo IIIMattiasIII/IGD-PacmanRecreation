@@ -14,13 +14,18 @@ public class LevelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scaredTimer;
     [SerializeField] private TextMeshProUGUI score;
     [SerializeField] private Transform lives;
+    [SerializeField] private GameObject pauseOverlay;
+    private bool pauseMenu = false;
+    private LevelManager.GameState lastState;
+    [HideInInspector] public Action BorderIn;
+    [HideInInspector] public Action BorderOut;
 
     void Awake() {
         if (levelManager == null) levelManager = GetComponent<LevelManager>();
     }
 
     public async Task StartSequence() {
-        await Task.Delay(100); // Slight delay to add visual clarity (mask unity leading) to start sequence
+        await Task.Delay(100); // Slight delay to add visual clarity (mask unity loading) to start sequence
         overlay.gameObject.SetActive(true);
         await SetCentreText("3", .5f, 500);
         await SetCentreText("2", .5f, 500);
@@ -72,6 +77,10 @@ public class LevelUI : MonoBehaviour
     public async Task GameOver() {
         overlay.gameObject.SetActive(true);
         await SetCentreText("Game Over", .5f, 2500);
+        QuitGame();
+    }
+
+    public void QuitGame() {
         StartUIManager menu = FindFirstObjectByType<StartUIManager>();
         if (menu == null) { // if scene loaded manually in editor
             UnityEditor.EditorApplication.isPlaying = false;
@@ -79,5 +88,32 @@ public class LevelUI : MonoBehaviour
             menu.LoadMenu();
             Time.timeScale = 1;
         }
+    }
+
+    void Update() {
+        if (!levelManager.isInnov || pauseOverlay == null) { return; }
+        if (Input.GetKeyDown(KeyCode.Escape) && levelManager.gameTime > 0) {
+            if (pauseMenu) { ResumeGame(); }
+            else { PauseGame(); }
+        }
+    }
+
+    public void PauseGame() {
+        lastState = levelManager.levelState;
+        levelManager.levelState = LevelManager.GameState.Paused;
+        pauseMenu = true;
+        Time.timeScale = 0;
+        pauseOverlay.SetActive(true);
+        levelManager.audioManager.OnPause();
+        BorderIn?.Invoke();
+    }
+
+    public void ResumeGame() {
+        levelManager.levelState = lastState;
+        pauseMenu = false;
+        Time.timeScale = 1;
+        pauseOverlay.SetActive(false);
+        levelManager.audioManager.OnPlay();
+        BorderOut?.Invoke();
     }
 }

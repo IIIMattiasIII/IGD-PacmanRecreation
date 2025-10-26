@@ -31,7 +31,7 @@ public class CanvasAnimator : MonoBehaviour
         while (true) {
             image.sprite = sprites[frameIdx++];
             if (frameIdx >= sprites.Length) { frameIdx = 0; }
-            yield return new WaitForSeconds(delay/1000);
+            yield return new WaitForSecondsRealtime(delay/1000);
         }
     }
 }

@@ -11,8 +11,8 @@ public class LevelManager : MonoBehaviour
     public float baseMoveSpeed = 3;
     public Vector2 levelSize = new(28,29);
     [SerializeField] private string levelId = "level01";
-    [SerializeField] private LevelUI uiManager;
-    [SerializeField] private AudioManager audioManager;
+    public LevelUI uiManager;
+    public AudioManager audioManager;
     [SerializeField] private BonusController bonusController;
     [SerializeField] private Player player;
     [SerializeField] private Enemy[] enemies;

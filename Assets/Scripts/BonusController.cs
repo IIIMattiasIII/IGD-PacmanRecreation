@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -20,7 +21,8 @@ public class BonusController : MonoBehaviour
 
     public async void BonusLoop() {
         while (true) {
-            await Task.Delay(5000);
+            // await Task.Delay(5000);
+            await Awaitable.WaitForSecondsAsync(5f);
             if (this == null) { return; }
             (float xPos, float yPos) = RandPos();
             GameObject chestGO = Instantiate(bonusChest, new Vector3(xPos, yPos, -7), Quaternion.identity);
