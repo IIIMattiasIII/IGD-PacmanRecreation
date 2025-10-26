@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
+        if (playerManager.levelManager.levelState == LevelManager.GameState.Paused) { return; }
         GetInput();
         if (lastInput == Vector3.zero) { return; }
         if (!tweener.TweenExists(transform) && playerManager.isAlive) {
