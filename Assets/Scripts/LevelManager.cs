@@ -87,12 +87,13 @@ public class LevelManager : MonoBehaviour
     void ResetLife() {
         player.movement.Reset();
         pointsMultiplier = 0;
+        attackTimer?.Reset();
+        levelState = GameState.Normal;
         foreach (Enemy e in enemies) {
             e.behaviour.Reset();
             e.movement.Reset();
         }
-        levelState = GameState.Normal;
-        attackTimer?.Reset();
+        audioManager.PlayBG();
     }
 
     async void Start() {
@@ -248,6 +249,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void RespawnMusicCheck() {
+        if (audioManager == null) return;
         if (enemies.All(e => e.state != Enemy.EnemyState.Dead)) {
             if (levelState == GameState.Normal) {
                 audioManager.PlayBG();

@@ -5,7 +5,7 @@ public class Blinky : EnemyBehaviour
     bool elroy = false;
     public override void Reset() {
         base.Reset();
-        enemyManager.state = Enemy.EnemyState.Chase;
+        enemyManager.state = enemyManager.levelManager.lastAttackState;
         enemyManager.baseSpeedModifier = .9f;
         elroy = false;
     }
@@ -20,6 +20,7 @@ public class Blinky : EnemyBehaviour
         }
         enemyManager.baseSpeedModifier = 1f;
         elroy = true;
+        enemyManager.Trigger("normal");
     }
 
     public override void SwapAttackState(Enemy.EnemyState attackState) {

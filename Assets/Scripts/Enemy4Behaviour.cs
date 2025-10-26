@@ -35,7 +35,6 @@ public class Enemy4Behaviour : EnemyLvl1Behaviour
         target = edgeTargets.Aggregate((currentMin, next) =>
             Vector2.Distance(transform.position, next) < Vector2.Distance(transform.position, currentMin) ? next : currentMin
         );
-        Debug.Log(target.x);
     }
 
     protected override void Chase(List<Vector3> directions) {

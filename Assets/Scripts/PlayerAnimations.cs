@@ -9,6 +9,7 @@ public class PlayerAnimations : MonoBehaviour
     [SerializeField] private ParticleSystem wallParticles;
     [SerializeField] private ParticleSystem deathParticles;
     private bool isDead => !playerMovement.playerManager.isAlive;
+    private Animator animator;
 
     void Awake() {
         playerMovement = GetComponent<PlayerMovement>();
@@ -22,19 +23,23 @@ public class PlayerAnimations : MonoBehaviour
         }
     }
 
+    void Start() { 
+        animator = playerMovement.playerManager.animator;
+    }
+
     void ToggleParticles(ParticleSystem particles, bool state) {
         ParticleSystem.EmissionModule particleEmission = particles.emission;
         particleEmission.enabled = state;
     }
 
     void Update() {
-        playerMovement.playerManager.animator.SetBool("dead", isDead);
-        if (!isDead && playerMovement.isMoving && !stepParticles.emission.enabled) {
+        animator.SetBool("dead", isDead);      
+        if (playerMovement.isMoving && !stepParticles.emission.enabled) {
             ToggleParticles(stepParticles, true);
-            playerMovement.playerManager.animator.speed = 1f;
-        } else if ((isDead || !playerMovement.isMoving) && stepParticles.emission.enabled) {
-            ToggleParticles(stepParticles, false);
-            if (!isDead) { playerMovement.playerManager.animator.speed = 0f; }
+            animator.speed = 1f;
+        } else if (!playerMovement.isMoving) {
+            if (stepParticles.emission.enabled) { ToggleParticles(stepParticles, false); }
+            animator.speed = isDead ? 1f : 0f;
         }
     }
 

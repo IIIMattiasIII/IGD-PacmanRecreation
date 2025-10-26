@@ -94,7 +94,6 @@ public class EnemyMovement : MonoBehaviour
         while (tweener.TweenExists(transform)) { yield return null; }
         enemyManager.movement.Move(exitPosition);
         while (tweener.TweenExists(transform)) { yield return null; }
-        enemyManager.state = Enemy.EnemyState.Chase;
         Callback();
     }
 

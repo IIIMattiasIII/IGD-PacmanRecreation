@@ -22,7 +22,8 @@ public class StartUIManager : MonoBehaviour
         DontDestroyOnLoad(border.transform.parent.gameObject);
         border.rectTransform.offsetMin = new(-25, -25);
         border.rectTransform.offsetMax = new(25, 25);
-        await Task.Delay(100); // Border lerp breaks if called immediately - only with unscaled time, I'd guess due to engine loading time being considered part of frame?
+        // Border lerp breaks if called immediately - only with _unscaled_ time, I'd guess due to engine loading time being considered part of frame?
+        await Awaitable.WaitForSecondsAsync(0.1f);
         _ = BorderIn(.75f);
     }
 

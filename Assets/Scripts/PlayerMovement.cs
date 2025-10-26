@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Reset() {
+        direction = Vector3.zero;
         transform.position = initPosition;
         currentInput = initDir;
         lastInput = initDir;

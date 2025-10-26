@@ -2390,6 +2390,7 @@ GameObject:
   - component: {fileID: 1329338964}
   - component: {fileID: 1329338963}
   - component: {fileID: 1329338962}
+  - component: {fileID: 1329338965}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: LevelExitButton
@@ -2499,6 +2500,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329338960}
   m_CullTransparentMesh: 1
+--- !u!114 &1329338965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329338960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f594535b87abdfe4183e7d1d701e4b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverPanel: {fileID: 0}
+  levelId: level01
+  hoverScale: 1.01
+  clickScale: 0.98
 --- !u!1 &1391052601
 GameObject:
   m_ObjectHideFlags: 0

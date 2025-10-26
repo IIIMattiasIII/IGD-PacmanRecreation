@@ -51,16 +51,19 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public void HomeSequence(float time) {
         if (homeSeq != null) { return; }
         enemyManager.Trigger("normal");
+        if (enemyManager.levelManager.gameTime > 1) { time = 0; } // Home time shouldn't apply after death
         homeSeq = StartCoroutine(enemyManager.movement.HomeMovement(time, HomeExit));
     }
 
     protected virtual void HomeExit() {
         homeSeq = null;
+        enemyManager.state = enemyManager.levelManager.isInnov ? enemyManager.levelManager.lastAttackState : Enemy.EnemyState.Chase;
         enemyManager.levelManager.CheckElroy();
     }
 
     public async void DeathSequence() {
         await enemyManager.movement.DeathMovement();
+        if (enemyManager.levelManager == null) return;
         enemyManager.state = Enemy.EnemyState.Home;
         enemyManager.levelManager.RespawnMusicCheck();
     }
@@ -70,8 +73,10 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
 
     public virtual void SwapAttackState(Enemy.EnemyState attackState) {
-        enemyManager.state = attackState;
-        enemyManager.movement.Backstep();
+        if (enemyManager.isActive) {
+            enemyManager.state = attackState;
+            enemyManager.movement.Backstep();
+        }
     }
 
     protected virtual void Scared(List<Vector3> directions) {

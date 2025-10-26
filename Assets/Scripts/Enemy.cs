@@ -21,6 +21,10 @@ public class Enemy : MonoBehaviour
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
     }
 
+    void Start() {
+        Trigger("normal");
+    }
+
     public void Trigger(string triggerName = null, EnemyState? state = null) {
         foreach (AnimatorControllerParameter parameter in animator.parameters) {
             if (parameter.type == AnimatorControllerParameterType.Trigger) {
